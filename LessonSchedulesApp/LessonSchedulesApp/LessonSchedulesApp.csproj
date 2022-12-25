@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,9 +33,18 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.SqlServer.ASTasks, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.BulkInsertTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.MaintenancePlanTasks, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,12 +56,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Days\frmDays.cs">
+    <Compile Include="Common\Days.cs" />
+    <Compile Include="Common\DaysProperty.cs" />
+    <Compile Include="Common\IdName.cs" />
+    <Compile Include="DAL\Days\DataGridViewFill.cs" />
+    <Compile Include="DAL\Groups\DataGridViewGroups.cs" />
+    <Compile Include="DAL\Groups\frmGroup.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Days\frmDays.Designer.cs">
+    <Compile Include="DAL\Groups\frmGroup.Designer.cs">
+      <DependentUpon>frmGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Groups\GroupsCrudOperation.cs" />
+    <Compile Include="DAL\Schedules\DataGridViewSchedules.cs" />
+    <Compile Include="DAL\Schedules\frmSchedules.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DAL\Schedules\frmSchedules.Designer.cs">
+      <DependentUpon>frmSchedules.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Schedules\SchedulesCrudOperation.cs" />
+    <Compile Include="DAL\Schedules\SchedulesDisplayModel.cs" />
+    <Compile Include="DAL\Schedules\ScheduleValidation.cs" />
+    <Compile Include="DAL\Schedules\ScheduleViewModel.cs" />
+    <Compile Include="DAL\Subjects\DataGridViewSubjects.cs" />
+    <Compile Include="DAL\Days\DaysCrudOperations.cs" />
+    <Compile Include="DAL\Subjects\SubjectsCrudOperation.cs" />
+    <Compile Include="DAL\Users\DataGridViewUser.cs" />
+    <Compile Include="DAL\Users\frmUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DAL\Users\frmUsers.Designer.cs">
+      <DependentUpon>frmUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Users\UserCrudOperation.cs" />
+    <Compile Include="DAL\Days\frmDays.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DAL\Days\frmDays.Designer.cs">
       <DependentUpon>frmDays.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extentions.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,7 +105,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Days\frmDays.resx">
+    <Compile Include="DAL\Subjects\frmSubjects.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DAL\Subjects\frmSubjects.Designer.cs">
+      <DependentUpon>frmSubjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\Tools.cs" />
+    <EmbeddedResource Include="DAL\Groups\frmGroup.resx">
+      <DependentUpon>frmGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\Schedules\frmSchedules.resx">
+      <DependentUpon>frmSchedules.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\Users\frmUsers.resx">
+      <DependentUpon>frmUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\Days\frmDays.resx">
       <DependentUpon>frmDays.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
@@ -74,7 +135,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="DAL\Subjects\frmSubjects.resx">
+      <DependentUpon>frmSubjects.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -89,7 +154,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DAL\" />
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
